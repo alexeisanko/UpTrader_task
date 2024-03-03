@@ -5,3 +5,4 @@ venv/
 *.sqlite-wal
 *.sqlite-shm
 db.sqlite3
+__pycache__

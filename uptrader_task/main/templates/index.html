@@ -1,15 +1,21 @@
 {% include 'base.html' %}
+{% load draw_menu %}
+
 
 {% block content %}
-    <h3><a href="{% url 'index' %}">Вернуться на главную страницу</a></h3>
-    <div class="container" style="display: flex;">
-        {% for menu in menus %}
-            <div style="margin: 100px ">
-            <ul>
-                <li><a href="{{ menu }}">{{ menu }}</a></li>
-            </ul>
-            </div>
-
-        {% endfor %}
-    </div>
+    <h3><a href="{% url 'index' %}">Главная страница</a></h3>
+    {% if menus %}
+        <div class="container" style="display: flex;">
+            {% for menu in menus %}
+                <div style="margin: 30px ">
+                    <ul>
+                        <li><a href="{{ menu }}">{{ menu }}</a></li>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    {% elif selected_menu %}
+        <h4>Выбрано {{ selected_menu }}</h4>
+        {% draw_menu selected_menu menu_item %}
+    {% endif %}
 {% endblock content %}

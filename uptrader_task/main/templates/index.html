@@ -1,1 +1,15 @@
 {% include 'base.html' %}
+
+{% block content %}
+    <h3><a href="{% url 'index' %}">Вернуться на главную страницу</a></h3>
+    <div class="container" style="display: flex;">
+        {% for menu in menus %}
+            <div style="margin: 100px ">
+            <ul>
+                <li><a href="{{ menu }}">{{ menu }}</a></li>
+            </ul>
+            </div>
+
+        {% endfor %}
+    </div>
+{% endblock content %}

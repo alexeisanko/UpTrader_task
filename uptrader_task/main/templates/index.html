@@ -9,7 +9,7 @@
             {% for menu in menus %}
                 <div style="margin: 30px ">
                     <ul>
-                        <li><a href="{{ menu }}">{{ menu }}</a></li>
+                        <li><a href="{{ menu.slug }}">{{ menu }}</a></li>
                     </ul>
                 </div>
             {% endfor %}

@@ -10,18 +10,20 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         count_menu = 4
+        max_nesting = 5
 
         for number_menu in range(1, count_menu + 1):
             new_menu = Menu.objects.create(name=f'Menu #{number_menu}')
 
             def _create_items_child(parent=None, menu=None):
-                count_item = random.randint(0, 2)
+                count_item = random.randint(0, 6)
                 for number_item in range(1, count_item + 1):
                     if parent is None:
                         new_item = MenuItem.objects.create(name=f'{menu} > Item #{number_item}', menu=new_menu)
                     else:
                         new_item = MenuItem.objects.create(name=f'{parent} > Item #{number_item}', menu=new_menu, parent=parent)
-                    _create_items_child(parent=new_item, menu=new_menu)
+                    if new_item.name.count('>') < max_nesting:
+                        _create_items_child(parent=new_item, menu=new_menu)
 
             _create_items_child(menu=new_menu)
 

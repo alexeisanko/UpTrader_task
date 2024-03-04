@@ -12,17 +12,17 @@ def draw_menu(menu: str = None, item_menu: str = None) -> dict:
         if item_menu is None:
             menu = list(items.filter(parent=None))
         else:
-            menu = list(items.filter(parent__name=item_menu))
+            menu = list(items.filter(parent__slug=item_menu))
         try:
             menu.insert(menu.index(submenu[0].parent) + 1, submenu)
         except (IndexError, TypeError):
             pass
         try:
-            return get_menu(items.get(name=item_menu).parent.name, menu)
+            return get_menu(items.get(slug=item_menu).parent.slug, menu)
         except ObjectDoesNotExist:
             return menu
         except AttributeError:
             return get_menu(submenu=menu)
 
-    items = MenuItem.objects.filter(menu__name=menu)
+    items = MenuItem.objects.filter(menu__slug=menu)
     return {'menu': get_menu(item_menu)}
